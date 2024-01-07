@@ -15,7 +15,7 @@ const textFont = Poppins({
 
 const Marketingpage = () => {
   return (
-    <div className="flex justify-center items-center flex-col">
+    <div className="flex justify-center items-center flex-col max-h-900">
       <div
         className={cn(
           "flex items-center justify-center flex-col",
@@ -40,10 +40,10 @@ const Marketingpage = () => {
 
       <Button
         size="lg"
-        className="mt-6 bg-black text-white hover:bg-black/75"
+        className="mt-6 bg-black text-white hover:bg-black/90"
         asChild
       >
-        <Link href={"/Sign-up"}>Get Taskify For Free</Link>
+        <Link href={"/sign-up"}>Get Taskify For Free</Link>
       </Button>
     </div>
   );
