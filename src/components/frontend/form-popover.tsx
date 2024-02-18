@@ -11,6 +11,8 @@ import { Button } from "../ui/button";
 import { X } from "lucide-react";
 import FormInput from "./form-input";
 import { FormSubmit } from "./form-submit";
+import { toast } from "sonner";
+import { Formpicker } from "./form-picker";
 
 interface FormPopoverProps {
   sideOffset?: number;
@@ -28,9 +30,11 @@ export const FormPopover = ({
   const { execute, fielderror } = useAction(CreateBoard, {
     onSuccess: (data) => {
       console.log({ data });
+      toast.success('Board created')
     },
     onError: (error) => {
       console.log({ error });
+      toast.error(error)
     },
   });
 
@@ -50,12 +54,14 @@ export const FormPopover = ({
       >
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
           <form action={onSubmit} className="space-y-4">
+            <Formpicker id="title" errors={fielderror} />
             <div className="space-y-4">
               <FormInput
                 label="Baord Title"
                 id="title"
                 placeholder="Enter"
                 type="text"
+                errors = {fielderror}
               />
             </div>
             <FormSubmit className="bg-gray-200" varient="outline">

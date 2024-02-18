@@ -19,6 +19,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   let board;
 
   try {
+    
     board = await db.board.create({
       data: {
         title,

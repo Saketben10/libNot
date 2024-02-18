@@ -1,15 +1,18 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import {Toaster} from 'sonner'
 
 interface PlatformLayoutprops {
   children: React.ReactNode;
 }
 
+
 const PlatformLayout = ({ children }: PlatformLayoutprops) => {
   return (
     <ClerkProvider> 
-    <html lang="eng">
-      <body>{children}</body>
-    </html>
+      <Toaster/>
+   
+    {children} 
+ 
     </ClerkProvider>
   );
 };
