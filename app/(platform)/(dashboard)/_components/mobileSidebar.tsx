@@ -1,5 +1,5 @@
 "use client";
-import { DoorClosedIcon, Menu } from "lucide-react";  
+import { DoorClosedIcon, LucideArrowBigRightDash, Menu } from "lucide-react";  
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { Mobilesidebar as mobilesidebarStore } from "../../../../hooks/use-mobile-sidebar";
@@ -33,8 +33,8 @@ export const Mobilesidebar = () => {
     <Sheet>
     <SheetTrigger asChild>
        
-      <Button onClick={onOpen} className="block md:hidden p-2 ml-1  " variant='ghost' size={'lg'} >
-      <CircleDashed/>
+      <Button onClick={onOpen} className="block md:hidden p-2 ml-1 mr-2  " variant='ghost' size={'lg'} >
+     <LucideArrowBigRightDash className="h-4 w-4"/>
 
       </Button>
       </SheetTrigger>

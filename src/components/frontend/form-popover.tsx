@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import {
   Popover,
   PopoverClose,
@@ -13,6 +14,7 @@ import FormInput from "./form-input";
 import { FormSubmit } from "./form-submit";
 import { toast } from "sonner";
 import { Formpicker } from "./form-picker";
+import { ElementRef, useRef } from "react";
 
 interface FormPopoverProps {
   sideOffset?: number;
@@ -29,19 +31,28 @@ export const FormPopover = ({
 }: FormPopoverProps) => {
   const { execute, fielderror } = useAction(CreateBoard, {
     onSuccess: (data) => {
-      console.log({ data });
+      
       toast.success('Board created')
+      closeBtn.current?.click()
+      router.push(`board/${data.id}`)
     },
     onError: (error) => {
-      console.log({ error });
+      
       toast.error(error)
     },
   });
 
   const onSubmit = (formData: FormData) => {
     const title = formData.get("title") as string;
-    execute({ title });
+    const image = formData.get('image')  as string;
+    console.log({image ,title});
+ 
+
+    execute({ title,image });
   };
+
+ const closeBtn = useRef<ElementRef<"button">>(null)
+ const router = useRouter()
 
   return (
     <Popover>
@@ -49,12 +60,12 @@ export const FormPopover = ({
       <PopoverContent
         side={side}
         align={align}
-        className="w-80 py-3"
+        className="w-80 py-3 z"
         sideOffset={sideOffset}
       >
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
           <form action={onSubmit} className="space-y-4">
-            <Formpicker id="title" errors={fielderror} />
+            <Formpicker id="image" errors={fielderror} />
             <div className="space-y-4">
               <FormInput
                 label="Baord Title"
@@ -64,13 +75,13 @@ export const FormPopover = ({
                 errors = {fielderror}
               />
             </div>
-            <FormSubmit className="bg-gray-200" varient="outline">
+            <FormSubmit className="bg-gray-200 hover:text-white" varient="primary">
               Create
             </FormSubmit>
           </form>
         </div>
         <PopoverClose asChild>
-          <Button
+          <Button ref={closeBtn}
             variant="ghost"
             className="absolute h-auto w-auto top-0 right-0 text-neutral-600"
           >
